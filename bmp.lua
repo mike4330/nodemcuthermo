@@ -17,6 +17,11 @@ function readBMP()
     
     print ("bmp180 temperature value is: " ..tf )
     print ("bmp180 absolute pressure value is: "..p .."  millibars")
+
+    syslog ("bmp180 temperature value is: " ..tf )
+    syslog ("bmp180 absolute pressure value is: "..p .."  millibars")
+   
+    
     -- release module
     bmp085 = nil
     package.loaded["bmp085"]=nil
@@ -26,4 +31,4 @@ print ("get first BMP reading\n")
 readBMP()
 
 
-tmr.alarm(0, 15000, tmr.ALARM_AUTO, function() readBMP() end) 
+tmr.alarm(0, bmpinterval, tmr.ALARM_AUTO, function() readBMP() end) 
